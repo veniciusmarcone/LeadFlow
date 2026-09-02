@@ -1,0 +1,106 @@
+# 🌊 LeadFlow Core — Lead Management & Analytics System
+
+<p align="center">
+  <img src="./Frontend/public/preview.png" alt="LeadFlow Preview" width="100%" />
+</p>
+
+<p align="center">
+  <strong>Plataforma Full-Stack corporativa para captação, monitoramento e conversão de leads com visual Glassmorphism e animações interativas via Canvas API nativa.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+</p>
+
+---
+
+## 📌 Visão Geral
+
+O **LeadFlow** soluciona a descentralização comercial em pequenas e médias empresas. Ele elimina a perda de clientes em potencial por falta de retorno ou falha de registro, organizando o funil comercial e fornecendo métricas de conversão e aquisição em tempo real.
+
+O projeto foi construído com arquitetura desacoplada (**API RESTful** em Node.js e SPA em React), aplicando práticas recomendadas de segurança, validação rigorosa de schemas e design voltado à experiência do usuário (Glassmorphism + Efeitos fluidos com HTML5 Canvas 2D).
+
+---
+
+## ✨ Principais Funcionalidades
+
+- 🔒 **Autenticação & Autorização:** Criptografia de senhas com `bcrypt`, emissão de tokens seguros via `JWT` e proteção de rotas privadas através de middleware customizado.
+- 📊 **Dashboard Analítico Dinâmico:**
+  - Métricas consolidadas (Total, Novos, Contactados e Convertidos).
+  - Análise temporal com alternância interativa (Dia, Semana e Mês) usando **Recharts**.
+  - Distribuição por canais de aquisição (Instagram, WhatsApp, Site, Indicação, etc.).
+- 🗂️ **Gestão Completa de Leads (CRUD):**
+  - Cadastro, visualização, edição e exclusão de leads.
+  - Filtros dinâmicos por status e busca textual combinada (nome, e-mail e empresa).
+- 🕒 **Histórico de Auditoria Automatizado:**
+  - Registro de eventos com rastreabilidade de operador e timestamps de modificações cadastrais.
+- 📁 **Exportação de Dados:**
+  - Geração e download sob demanda de relatórios completos em formato **CSV**.
+- 🎨 **UI/UX Futurista & Responsiva:**
+  - Estética *Deep Dark Glassmorphism*.
+  - Animação de ondas oceânicas dinâmicas que reagem à física do cursor do mouse construídas puramente com **HTML5 Canvas 2D**.
+  - Feedbacks instantâneos via `Sonner` e ícones padronizados via `Lucide React`.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### **Frontend**
+- **React 18** (Vite)
+- **React Router DOM v6** (Navegação SPA)
+- **Recharts** (Visualização de métricas e gráficos)
+- **Lucide React** (Ícones vetoriais)
+- **Sonner** (Notificações toast)
+- **HTML5 Canvas API** (Animação fluida e reativa a 60 FPS sem dependências pesadas)
+
+### **Backend**
+- **Node.js** & **Express**
+- **PostgreSQL** (Driver nativo `pg` com pool de conexões)
+- **Zod** (Validação e sanitização estrita de schemas)
+- **JSON Web Token (JWT)** & **Bcrypt** (Autenticação e hashing)
+- **CORS** & **Dotenv**
+
+---
+
+## 🗄️ Modelo de Dados (PostgreSQL)
+
+```sql
+-- Usuários do sistema
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Leads comerciais
+CREATE TABLE leads (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(50),
+    company VARCHAR(255),
+    source VARCHAR(100),
+    status VARCHAR(50) DEFAULT 'new',
+    notes TEXT,
+    assigned_to INTEGER REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Auditoria e histórico
+CREATE TABLE lead_history (
+    id SERIAL PRIMARY KEY,
+    lead_id INTEGER REFERENCES leads(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id),
+    action VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

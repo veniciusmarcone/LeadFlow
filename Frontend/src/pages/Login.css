@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ocean-login-wrapper {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Canvas ocupando o fundo inteiro */
+.ocean-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Vinheta de luz para dar foco no centro */
+.ocean-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 35%, rgba(5, 11, 20, 0.85) 90%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Card Principal Glassmorphism translúcido */
+.login-card-glass {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 430px;
+    background: rgba(10, 20, 38, 0.68);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 20px;
+    padding: 40px 34px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 35px -5px rgba(14, 165, 233, 0.2);
+}
+
+.brand-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(37, 99, 235, 0.2));
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    margin-bottom: 12px;
+}
+
+.ocean-icon {
+    color: #38bdf8;
+}
+
+.brand-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+}
+
+.brand-header h2 span {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-header p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Formulário */
+.futuristic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group-glow label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-icon {
+    position: absolute;
+    left: 14px;
+    color: #64748b;
+    transition: color 0.2s;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 13px 14px 13px 44px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: #f8fafc;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.input-wrapper input:focus {
+    border-color: #38bdf8;
+    background: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+.input-wrapper input:focus+.field-icon,
+.input-wrapper:focus-within .field-icon {
+    color: #38bdf8;
+}
+
+/* Botão de Envio */
+.ocean-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+.ocean-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+    background: linear-gradient(135deg, #0369a1, #1d4ed8);
+}
+
+.ocean-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Rodapé */
+.security-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 24px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.security-footer svg {
+    color: #10b981;
+}

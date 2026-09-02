@@ -1,0 +1,7 @@
+$login = Invoke-RestMethod -Uri "http://localhost:3000/api/auth/login" -Method POST -ContentType "application/json" -Body '{"email":"joao@leadflow.com","password":"123456"}'
+
+$userHeaders = @{
+    Authorization = "Bearer $($login.token)"
+}
+
+Invoke-RestMethod -Uri "http://localhost:3000/api/dashboard/stats" -Method GET -Headers $userHeaders

@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: leadflow_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: leadflow
+    ports:
+      - "5432:5432"
+    volumes:
+      # Executa o schema.sql automaticamente na primeira vez que o container sobe
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # Mantém os dados salvos mesmo se você parar o container
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local
